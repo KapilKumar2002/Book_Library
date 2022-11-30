@@ -1,6 +1,5 @@
 import 'package:book_library/constant.dart';
 import 'package:book_library/pages/NavigationBar.dart';
-import 'package:book_library/pages/PhoneAuthPage.dart';
 import 'package:book_library/pages/SignUp.dart';
 import 'package:book_library/services/Auth_service.dart';
 import 'package:flutter/material.dart';
@@ -47,21 +46,6 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              buttonItem(FontAwesomeIcons.google, "Continue with Google", () {
-                authClass.googleSignIn(context);
-              }),
-              SizedBox(
-                height: 15.0,
-              ),
-              buttonItem(FontAwesomeIcons.phone, "Continue with phone", () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => const PhoneAuthPage()));
-              }),
               SizedBox(
                 height: 15,
               ),

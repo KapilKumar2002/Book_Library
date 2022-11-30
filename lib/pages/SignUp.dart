@@ -1,5 +1,4 @@
 import 'package:book_library/constant.dart';
-import 'package:book_library/pages/PhoneAuthPage.dart';
 import 'package:book_library/pages/SignInPage.dart';
 import 'package:book_library/services/Auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -86,29 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 "Or",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              buttonItem(
-                FontAwesomeIcons.google,
-                "Continue with Google",
-                () async {
-                  await authClass.googleSignIn(context);
-                },
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              buttonItem(
-                FontAwesomeIcons.phone,
-                "Continue with phone",
-                () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => const PhoneAuthPage()));
-                },
-              ),
+
               SizedBox(
                 height: 30.0,
               ),

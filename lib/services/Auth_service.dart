@@ -68,55 +68,6 @@ class AuthClass {
     return await storage.read(key: "token");
   }
 
-  Future<void> verifyPhoneNumber(
-      String phoneNumber, BuildContext context, Function setData) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
-      showSnackBar(context, "Verification Complete");
-    };
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException exception) {
-      showSnackBar(context, exception.toString());
-    };
-
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
-      showSnackBar(context, "Time Out");
-    };
-
-    try {
-      await auth.verifyPhoneNumber(
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationFailed,
-          phoneNumber: phoneNumber,
-          codeSent: (String? verificationId, int? resendToken) {
-            showSnackBar(context, "Verification Code sent on the phone number");
-            setData(verificationId);
-          },
-          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
-  }
-
-  Future<void> SignInWithPhoneNumber(
-      String verificationId, String smsCode, BuildContext context) async {
-    try {
-      AuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: verificationId, smsCode: smsCode);
-      UserCredential userCredential =
-          await auth.signInWithCredential(credential);
-      storageToken(userCredential);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (builder) => BottomNavigation()),
-          (route) => false);
-      showSnackBar(context, "Logged In");
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
-  }
-
   void showSnackBar(BuildContext context, text) {
     final snackBar = SnackBar(content: Text(text));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
